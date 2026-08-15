@@ -1,0 +1,64 @@
+# ---- C / C++ build artifacts ----
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+a.out
+*.gch
+*.pch
+
+# Debug info
+*.dSYM/
+*.pdb
+*.ilk
+*.su
+*.idb
+
+# ---- CUDA ----
+*.ptx
+*.cubin
+*.fatbin
+*.i
+*.ii
+*.gpu
+*.cudafe*
+*.fatbin.c
+*.reg.c
+*_dlink.*
+# nvcc intermediate/temp files
+*.o.tmp
+
+# ---- Profiler output (Nsight) ----
+*.nsight-cuprof-report
+*.ncu-rep
+*.nsys-rep
+*.qdrep
+*.qdstrm
+*.sqlite
+
+# ---- Build directories ----
+build/
+bin/
+obj/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+# ---- Editor / OS ----
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# ---- Local scratch ----
+scratch/
+tmp/
+*.log
