@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void swap(int *a, int *b){
-    int *temp = a;
+    int temp = *a;
     *a = *b;
     *b = temp;
     // pointer deference to swap two integers
