@@ -1,38 +1,41 @@
-# mlsys — C → CUDA → ML Systems Learning Path
+# mlsys — GPU / ML Systems Performance Curriculum
 
-A hands-on path from C fundamentals to writing and benchmarking GPU kernels for machine learning. Each folder has its own `README.md` with a checkbox plan, exercises, and resources.
+This repository is a lab course, not a checklist of topics. Progress is based on
+code, measurements, profiler evidence, and explanations written by the learner.
+A checked box in an older README is historical context, not proof of mastery.
 
-## Roadmap
+## Start here
 
-### 01 — C Fundamentals
-The memory-management foundation everything else builds on.
-- [ ] [pointers](01-c-fundamentals/pointers/README.md)
-- [ ] [arrays-strings](01-c-fundamentals/arrays-strings/README.md)
-- [ ] [structs](01-c-fundamentals/structs/README.md)
-- [ ] [malloc-free](01-c-fundamentals/malloc-free/README.md)
-- [ ] [linked-list](01-c-fundamentals/linked-list/README.md) *(combines the four above)*
+1. Read [`docs/CURRENT_SKILL_AUDIT.md`](docs/CURRENT_SKILL_AUDIT.md).
+2. Follow the single ordered path in [`LEARNING_PLAN.md`](LEARNING_PLAN.md).
+3. Record only implementation evidence in [`PROGRESS.md`](PROGRESS.md).
+4. Begin with [`01-c-fundamentals/memory-safety-checkpoint`](01-c-fundamentals/memory-safety-checkpoint/README.md).
 
-### 02 — CUDA Fundamentals
-Learn the GPU programming model, then build up to a fast matmul.
-- [ ] [00-smoke-test](02-cuda-fundamentals/00-smoke-test/README.md)
-- [ ] [01-vector-add](02-cuda-fundamentals/01-vector-add/README.md)
-- [ ] [02-matmul-naive](02-cuda-fundamentals/02-matmul-naive/README.md)
-- [ ] [03-matmul-tiled](02-cuda-fundamentals/03-matmul-tiled/README.md)
+## Curriculum
 
-### 03 — [Benchmark Harness](03-benchmark-harness/README.md)
-Measure kernel performance correctly (GFLOP/s, GB/s, roofline).
+- `01-c-fundamentals/` — pointers, arrays, allocation, ownership, layout, sanitizers
+- `02-cpp-systems/` — RAII, containers, copy/move, generic code, concurrency
+- `03-systems-performance/` — caches, VM/TLBs, benchmarking, perf, SIMD, models
+- `04-cuda-fundamentals/` — kernels, indexing, memory, tiling, reductions, streams
+- `05-gpu-performance/` — measurement, coalescing, divergence, occupancy, Nsight, fusion
+- `06-ml-inference-systems/` — transformer execution, KV cache, batching, precision, profiling
+- `07-ml-capstone/` — one measured, explained, end-to-end inference optimization
 
-### 04 — [ML Capstone](04-ml-capstone/README.md)
-Combine everything into a real ML workload (toward llm.c).
+Compiler work such as LLVM/MLIR is intentionally deferred until the core path is
+complete.
 
-## Order
-Work top to bottom. Within `01`, do pointers/structs/malloc before linked-list.
-Within `02`, do them in numeric order. Build `03` once you have a kernel worth
-timing (after `02-matmul-naive`), then reuse it throughout `02` and `04`.
+## The performance loop
 
-## Core references
-- **Beej's Guide to C** — https://beej.us/guide/bgc/
-- **NVIDIA "Even Easier Introduction to CUDA"** — https://developer.nvidia.com/blog/even-easier-introduction-cuda/
-- **Simon Boehm, "How to Optimize a CUDA Matmul Kernel"** — https://siboehm.com/articles/22/CUDA-MMM
-- **Programming Massively Parallel Processors (PMPP)**, Kirk & Hwu
-- **karpathy/llm.c** — https://github.com/karpathy/llm.c
+Every performance lab uses the same engineering record:
+
+> Observe → hypothesize → choose a metric/tool → isolate one variable → measure
+> → explain the bottleneck → optimize → remeasure → explain the change
+
+Keep raw results and environment details. Do not claim a speedup from a single
+sample or from runs whose correctness has not been checked.
+
+## Evidence policy
+
+Existing learner source remains learner-owned. Curriculum scaffolding may point
+out a defect, ask a question, or provide a test contract, but it must not replace
+the implementation with a solution. There is deliberately no solutions folder.

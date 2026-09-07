@@ -54,4 +54,12 @@ int main(){
     if(tmp == NULL) printf("valid"); // still valid
     a = tmp;
     return 0;
+
+
+    // Example to analyze
+
+    int *p = malloc(sizeof *p);  
+    *p = 7;
+    int *q = p;
+    p = NULL;
 }
