@@ -1,21 +1,26 @@
-# Resume here: C memory lifetime
+# Resume here: finish memory safety, then pointers
 
-Session bookmark (mentor summary, not a completed implementation gate).
+Session bookmark — 2026-09-07.
 
-You correctly predicted that copying p into q copies the address, and that
-setting p to NULL leaves q pointing to the still-live allocation. You also
-distinguished freeing an allocation from setting a pointer variable to NULL.
+Today you repaired mallote.c incrementally: live source before memcpy, one free
+per allocation, allocation failure checks, calloc, and safe realloc cleanup.
+You correctly predicted b[0] == 999 and c[0] == 0, explained why b becomes
+invalid after free(a), and recognized the leak caused by losing the original
+pointer when realloc fails.
 
-Reinforce next time:
-- malloc(sizeof *p) allocates space for one int when p has type int *.
-- free ends the allocated object's lifetime; it does not guarantee erased bytes.
-- The address stored in p is different from the address of p itself (&p).
-- A separate malloc call explains c's separate allocation.
+Strict C17 compilation and an ordinary run passed. The ASan/UBSan build
+succeeded, but its run did not promptly return; the sanitizer gate remains
+pending. Commands and observed output are in malloc-free/NOTES.md.
 
-Next task: open 01-c-fundamentals/malloc-free/mallote.c and explain in your own
-notes why memcpy(c, a, ...) cannot safely read its source after the earlier
-free(a) and a = NULL. Predict before editing.
+Start next session:
+1. Add a newline to the printf for *q so 7 and the next 0 print separately.
+2. Finish the sanitizer investigation and ownership/failure-path notes in
+   01-c-fundamentals/memory-safety-checkpoint/NOTES.md. Do not mark the checkpoint
+   complete yet. Define and exercise make_array's input contract too; main does
+   not currently call it.
+3. After the checkpoint, resume 01-c-fundamentals/pointers/pointers.c. Start by
+   predicting age and *ptr before and after *ptr = 44, then call the existing
+   swap function on two integers and print their values before and after.
+   Compile with strict warnings and repair diagnostics incrementally.
 
-The allocation exercise is still in progress. Strict compilation and sanitizer
-gates have not been passed. Preserve the learner implementation and repair it
-incrementally; do not replace it with a completed solution.
+Preserve the learner implementation; do not replace it with a completed solution.

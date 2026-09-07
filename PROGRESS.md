@@ -5,7 +5,7 @@ passes. Reading alone does not count.
 
 ## 01 — C memory foundation
 
-- [ ] `mallote.c` compiles with `-Wall -Wextra -Wpedantic -Werror`.
+- [x] `mallote.c` compiles with `-Wall -Wextra -Wpedantic -Werror`.
 - [ ] `mallote.c` passes AddressSanitizer and UndefinedBehaviorSanitizer.
 - [ ] Allocation ownership/failure paths are explained in checkpoint `NOTES.md`.
 - [ ] Array/string functions pass edge-case tests without sanitizer findings.
